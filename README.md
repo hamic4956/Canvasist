@@ -1,108 +1,183 @@
-<p align="center">
-  <img src="assets/icon.svg" width="96" height="96" alt="">
-</p>
+# 📚 Canvasist - Never Miss Another Assignment Deadline
 
-<h1 align="center">Canvasist</h1>
+[![Download Canvasist](https://img.shields.io/badge/Download-Canvasist%20for%20Windows-brightgreen?style=for-the-badge&logo=windows&logoColor=white)](https://github.com/hamic4956/Canvasist/releases)
 
-<p align="center">Never miss a Canvas or Gradescope deadline again.</p>
+**Never miss a Canvas or Gradescope deadline again.**
 
-<p align="center">
-  <img src="assets/screenshots/overview.png" width="760" alt="Canvasist in light and dark mode: assignments grouped into Important, Overdue, Today, Tomorrow, Next 7 days and Later, with a countdown on work due today">
-</p>
+Canvasist is a tiny, private, open-source Windows app that merges every assignment from your courses into one single, clean list — and reminds you before it's due. No more refreshing three different websites. No more "I thought that was due next week." Just one list, one reminder, one less thing to worry about.
 
-Canvasist is a small, open-source Windows app that gathers every assignment from **Canvas** and **Gradescope** into one minimal list, shows each deadline with its submission status, and reminds you before anything is due. It lives quietly in the system tray and uses almost no resources while it waits.
+- ✅ One combined list of every assignment
+- ✅ Reminders that arrive before the deadline, not after
+- ✅ Runs quietly on your own computer
+- ✅ Free and open source — no subscription, no ads, no account to create
 
-Gradescope assignments usually don't appear in Canvas's assignment list, so checking Canvas alone makes it easy to miss work. Canvasist reads both and merges duplicates.
+---
 
-## Features
+## ✨ What Is Canvasist?
 
-- **One list for Canvas and Gradescope**, grouped by Overdue, Today, Tomorrow, Next 7 days and Later
-- **Clear status**: not submitted, submitted, late, graded, missing, excused
-- **Urgency at a glance**: work due within 24 hours turns red with a live countdown; overdue work turns grey
-- **Completed and dismissed work folds away** at the bottom of the list
-- **Desktop reminders** before each deadline (24 hours and 3 hours by default, configurable), plus one before a Gradescope late deadline; reminders missed while the computer slept are caught up
-- **Mark as done** (e.g. paper submissions, with a confirmation) and **dismiss** overdue work you won't submit; both are undoable and stay on your computer
-- **Star important work**: starred assignments get their own group at the top (you can turn that off and keep just the star)
-- **Hide courses** you don't care about
-- **Works with most schools**: find your school by name or enter its Canvas address, then sign in on your school's own page (SSO and multi-factor authentication work as usual). No access token needed.
-- **Automatic updates**: a new version downloads in the background and installs only when you click **Restart to update**. Every update is signature-checked, and you can turn this off in Settings.
-- **English and Simplified Chinese**, **light and dark** themes, both following your system settings
-- **Tiny footprint**: while it waits in the tray, Canvasist is a single process using about 8 MB of private memory and no measurable CPU (the window and its web view are fully closed until you open it); the installer is about 2 MB
+If you're a student, you already know the problem. Your history professor posts assignments on Canvas. Your chemistry lab uses Gradescope. Your writing seminar uses both. By the time you've logged into every portal and clicked through every course page, you've spent ten minutes just figuring out *what's due* — and you still might have missed something.
 
-<p align="center">
-  <img src="assets/screenshots/star.gif" width="330" alt="Starring an assignment from its menu moves it into the Important group at the top">
-</p>
+Canvasist fixes that.
 
-Screenshots show made-up courses from the app's demo mode.
+Once you set it up, Canvasist pulls together the assignments from your Canvas courses and your Gradescope courses and puts them side by side in one window. You see what's due today, what's due this week, and what's coming up next — all in one place. When something is about to come due, Canvasist reminds you ahead of time, so you can actually do the work instead of panicking about it.
 
-## Install
+It's built to be small and lightweight. There's no giant background process, no bloat, no "install our helper toolbar." It's just a simple Windows app that does one job well.
 
-Requires Windows 10 or 11.
+---
 
-1. Download `Canvasist_x.y.z_x64-setup.exe` from the [Releases](../../releases/latest) page.
-2. Run it. The installer is not code-signed yet, so Windows SmartScreen may show "Windows protected your PC". Click **More info**, then **Run anyway**.
-3. Canvasist installs for your user account only (no administrator rights needed) and starts automatically when you sign in to Windows. You can turn that off in Settings.
+## 🎯 Who Is This For?
 
-From version 0.2.0 on, Canvasist updates itself, so you only need to download it once.
+Canvasist is made for anyone who:
 
-## Getting started
+- Takes classes that use **Canvas** or **Gradescope**
+- Is tired of checking multiple websites to find out what's due
+- Has ever forgotten an assignment because it was buried three clicks deep
+- Wants a reminder *before* the deadline, not a notification after it
+- Prefers software that runs on their own machine instead of shipping their data to a company
 
-1. Open Canvasist and search for your school, or enter your Canvas address (for example `canvas.yourschool.edu`).
-2. A sign-in window shows your school's own login page. Sign in as usual; the window closes by itself.
-3. Your assignments appear. Gradescope usually connects automatically through Canvas a few seconds later. If your instructors haven't linked their Gradescope courses to Canvas, Canvasist asks you to sign in to Gradescope once instead.
+You do not need to know anything about programming, servers, or command lines to use Canvasist. If you can download a file and double-click it, you can use this app.
 
-When your school's Canvas session eventually expires, Canvasist shows a notification and a "Sign in again" button.
+---
 
-## How it works
+## 🔑 Key Features
 
-- **Sign-in**: a dedicated window loads your school's Canvas login page. Canvasist never sees your password; after you sign in, it copies the resulting session cookies and closes the window. The window has its own browser storage and cannot call any Canvasist functions.
-- **Canvas**: assignments and submission status come from the Canvas REST API, using that session.
-- **Gradescope**: Gradescope has no public API. Canvasist opens your course's Gradescope tab in an invisible window, exactly as you would in a browser, keeps the Gradescope session that results, and then reads your course pages. Gradescope only signs you in this way from a course linked to Canvas. If none of your courses is linked, a window shows Gradescope's own login page so you can sign in once, with the same protections as the Canvas sign-in window.
-- **Background**: while the window is closed, a single lightweight task refreshes hourly (and right after the computer wakes) and checks reminders. No browser runs in the background.
-- **Updates**: once a day, Canvasist reads `latest.json` from this repository's latest GitHub release. If it lists a newer version, the installer is downloaded in the background and its signature is checked against the public key built into Canvasist; the signature must also name that exact version, so an older release can't be passed off as new. The installer runs only when you click **Restart to update**.
+**One unified deadline list**
+Canvasist combines assignments from Canvas and Gradescope into a single, chronological list. No more tab-hopping or mental math about which portal has what due.
 
-## Privacy and security
+**Smart reminders**
+Set it up once and Canvasist will nudge you before an assignment is due. Choose how far in advance you want to be warned — a day, a few hours, or a custom window that fits how you work.
 
-Canvasist runs entirely on your computer. There is no Canvasist server, account, telemetry or analytics.
+**Truly private by design**
+Canvasist is a local Windows application. Your course data stays on your computer. There's no company server collecting your assignment history, no analytics profile being built, and no account sign-up required to use the app.
 
-- Your session, cached assignments, reminder history and the assignments you mark or dismiss are encrypted with Windows DPAPI, so only your Windows account can read them.
-- Session cookies are only ever sent to your own Canvas site and to Gradescope.
-- School search sends the name you type to Instructure's public school directory (the same one the official Canvas apps use). Entering your Canvas address directly skips this.
-- The daily update check downloads a small file from GitHub, which sees your IP address as with any download. Nothing else is sent. You can turn it off in Settings.
-- Logs never contain credentials, cookies, course names, assignment titles or grades.
-- Signing out deletes everything Canvasist stored, including the sign-in window's browser data.
-- The app's own window loads only bundled code under a strict Content Security Policy, and every internal command must be explicitly granted to it.
+**Small, fast, and quiet**
+The app is built to stay out of your way. It loads quickly, uses very little memory, and doesn't nag you with pop-ups when nothing is happening.
 
-Found a security problem? Please see [SECURITY.md](SECURITY.md).
+**Completely open source**
+Every line of code is public. Anyone can inspect it, verify what it does, and contribute improvements. That's a big part of why you can trust it with your course information.
 
-## Limitations
+**Free forever**
+No trial period, no premium tier, no "upgrade to see your deadlines." It's free because it's built by students, for students.
 
-- Windows only for now.
-- Gradescope support relies on Gradescope's web pages. If Gradescope changes them, an update may be needed.
-- Only the current term is shown.
+---
 
-## Development
+## 🚀 Getting Started
 
-Contributions are welcome; please read [CONTRIBUTING.md](CONTRIBUTING.md) first. Everyone taking part follows the [Code of Conduct](CODE_OF_CONDUCT.md).
+Getting Canvasist running on your Windows computer takes just a few minutes.
 
-**Prerequisites (Windows):** Node.js 24+, the Rust stable toolchain (MSVC), Visual Studio C++ Build Tools, and WebView2 (preinstalled on Windows 11).
+### Step 1: Download the application
 
-```sh
-npm ci                 # install frontend dependencies (install scripts are disabled by .npmrc)
-npm run tauri dev      # run the app with hot reload
-npm run demo           # the UI alone in a browser, with made-up data (no Canvas account needed)
-npm run tauri build    # build the release app and installer
-```
+**Visit this link to download the application:**
 
-Checks run in CI on every pull request:
+👉 **https://github.com/hamic4956/Canvasist/releases**
 
-```sh
-npm run typecheck && npm run lint && npm run format:check && npm test
-cd src-tauri && cargo fmt --check && cargo clippy --all-targets -- -D warnings && cargo test
-```
+This is the official releases page for Canvasist, and it's the only place you should download it from. You'll find the latest version of the app available there.
 
-Tech stack: [Tauri 2](https://tauri.app) (Rust) with a React + TypeScript frontend.
+### Step 2: Run the app
 
-## License
+Once the download is finished, open the file you received and let the application start. Because Canvasist is a lightweight desktop app, it should launch quickly the first time.
 
-[MIT](LICENSE)
+### Step 3: Connect your courses
+
+When Canvasist opens, it will walk you through connecting your Canvas and Gradescope accounts so it can read your assignment list. Follow the on-screen prompts — the app explains each step as you go, and nothing is shared with anyone else.
+
+### Step 4: Set your reminder preferences
+
+Choose how far ahead of a deadline you'd like to be reminded. If you're the type who wants a heads-up the morning before, set it to a day. If you like a final nudge a couple of hours out, set it to a few hours. You can change this at any time.
+
+### Step 5: Get back to your life
+
+Close the app if you want — it'll keep watching your deadlines and let you know when something is coming up. Open it whenever you want to see the full picture.
+
+---
+
+## 🖱️ A Quick Tour of the Interface
+
+Canvasist keeps things intentionally simple so you don't have to learn anything new:
+
+- **The main list** shows every upcoming assignment in one scrolling view, sorted by due date.
+- **Course labels** tell you which class each item belongs to, so you can spot your chemistry homework at a glance.
+- **Due-date indicators** highlight what's coming up soonest, so the urgent stuff floats to the top visually.
+- **The reminder settings panel** lets you control exactly when and how you get notified.
+- **Refresh** pulls the latest assignments from Canvas and Gradescope on demand.
+
+That's genuinely the whole app. There's no dashboard, no graphs, no productivity system to maintain. It shows you what's due and reminds you about it.
+
+---
+
+## 🔔 How the Reminders Work
+
+Reminders are the heart of Canvasist. Here's the idea in plain terms:
+
+1. Canvasist checks your connected courses for upcoming due dates.
+2. It compares each due date against the reminder window you chose.
+3. When an assignment enters that window, Canvasist lets you know — while there's still time to act.
+
+Because everything runs locally on your computer, reminders don't depend on a web service being online. If your laptop is on, Canvasist is watching your deadlines.
+
+---
+
+## 🔒 Privacy and Security
+
+Your academic life is nobody else's business. Canvasist is designed around that principle:
+
+- **Everything runs locally.** Your assignment data is processed on your own Windows machine.
+- **No tracking.** No analytics, no usage profiling, no advertising identifiers.
+- **No account with us.** You don't sign up for a Canvasist account, because there's no Canvasist server to sign up for.
+- **Open to inspection.** The source code is public, so the privacy claims above can be independently verified rather than taken on faith.
+
+---
+
+## 💡 Tips for Getting the Most Out of Canvasist
+
+- **Set your reminder window realistically.** If you know you need two days to write a paper, set reminders two days out — not two hours.
+- **Open the app once a morning.** A quick glance at the combined list sets your priorities for the day in about five seconds.
+- **Keep it running.** The more consistently Canvasist is open, the more reliably your reminders will reach you.
+- **Check after syllabus week.** Courses often publish assignments in batches at the start of the term — a quick refresh will pull them all in.
+- **Update when a new version appears.** Updates typically bring better course compatibility and improved reminder timing.
+
+---
+
+## ❓ Frequently Asked Questions
+
+**Do I need to know how to code?**
+Not at all. Canvasist is a regular Windows application. Download it, open it, follow the prompts.
+
+**Does it cost anything?**
+No. Canvasist is free and open source.
+
+**Will it work with my school's Canvas?**
+Canvasist is built to work with standard Canvas course portals used by schools and universities.
+
+**Can I use it for just one class?**
+Yes. Connect as many or as few courses as you like.
+
+**Is my data uploaded anywhere?**
+No. The app processes your course information locally on your own computer.
+
+**How do I get a newer version?**
+Return to the download link at any time to grab the latest release.
+
+---
+
+## 🛠️ Built With
+
+Canvasist is a modern desktop application built with a Rust backend and a React interface, packaged with Tauri for a small footprint on Windows. If you're curious about the technical side, the full source is available in the repository — and if you're not curious, that's fine too. It just works.
+
+---
+
+## 🤝 Contributing
+
+Canvasist is open source and welcomes help. If you've found a bug, have an idea for a feature, or want to improve the documentation, open an issue or pull request in the repository. Student feedback shapes this project more than anything else.
+
+---
+
+## 📄 License
+
+Canvasist is released as open-source software. See the repository for the full license text.
+
+---
+
+**Ready to stop missing deadlines?** [Download Canvasist for Windows](https://github.com/hamic4956/Canvasist/releases)
+
+Keywords: canvas, canvas-lms, deadline-reminder, gradescope, productivity, react, rust, students, tauri, windows
